@@ -14,7 +14,7 @@ export default function ClosingCTA() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-primary mb-6 block">
-            FlexiPay Systems
+            your accounting firm
           </span>
 
           <h2 className="text-4xl md:text-5xl font-black text-brand-text mb-6 leading-tight tracking-tight">
