@@ -1,15 +1,45 @@
-export default function TrustBar() {
+"use client";
+
+import { motion } from "framer-motion";
+import { SiteData } from "@/types/site";
+
+type Props = {
+  data: SiteData["trustBar"];
+};
+
+export default function TrustBar({ data }: Props){
+
+
   return (
-    <section className="border-y border-brand-navy/5 bg-white py-12">
+    <section className="border-y border-brand-navy/5 bg-white py-12 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
+
         <p className="text-center text-xs font-bold text-brand-slate uppercase tracking-[0.2em] mb-10">
-          Certified Expert in Modern Financial Tools
+          {data.badge}
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-20 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
-          <span className="text-2xl font-bold tracking-tighter text-brand-navy underline decoration-brand-gold decoration-4 text-nowrap">QuickBooks</span>
-          <span className="text-2xl font-light tracking-widest uppercase text-nowrap">Xero</span>
-          <span className="text-2xl font-black italic text-nowrap">Fresh<span className="text-brand-gold">Books</span></span>
-          <span className="text-2xl font-semibold tracking-tight text-nowrap">GUSTO</span>
+
+        {/* CAROUSEL WRAPPER */}
+        <div className="relative overflow-hidden">
+
+          <motion.div
+            className="flex gap-16 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 20,
+              ease: "linear",
+            }}
+          >
+            {[...data.items, ...data.items].map((item, i) => (
+              <span
+                key={i}
+                className="text-2xl font-bold text-brand-navy opacity-50 hover:opacity-100 transition"
+              >
+                {item.name}
+              </span>
+            ))}
+          </motion.div>
+
         </div>
       </div>
     </section>

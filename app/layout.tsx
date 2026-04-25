@@ -1,28 +1,47 @@
-"use client";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
+import AccountingChat from "@/components/AccountingChat";
+import ClientWrapper from "@/components/ClientWrapper";
+import { Metadata } from "next";
+import siteData from "@/config/siteData";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: "FlexiPay Systems | Automated UK Payroll & Finance",
+  description:
+    "Advanced financial systems and automated payroll for UK founders and business owners.",
+  metadataBase: new URL("https://flexipaysystems.com"),
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en-GB" className="scroll-smooth">
       <body className={inter.className}>
+        
+        {/* Static header (NO animation wrapper) */}
         <Header />
-        <AnimatePresence mode="wait">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
+
+        {/* ONLY animate page content */}
+        <main>
+          <ClientWrapper>
             {children}
-          </motion.div>
-        </AnimatePresence>
-        <Footer />
+          </ClientWrapper>
+        </main>
+
+        {/* Static footer (NO animation wrapper) */}
+       <Footer data={siteData.footer} />
+
+        {/* Floating UI (outside animation system) */}
+        <AccountingChat />
+
       </body>
     </html>
   );
