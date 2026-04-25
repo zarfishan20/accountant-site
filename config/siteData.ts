@@ -19,7 +19,7 @@ const siteData: SiteData = {
       { name: "ROI Tracker", href: "/#roi-calc" },
       { name: "Tax Optimizer", href: "/#salary-calc" },
     ],
-    loginUrl: "https://portal.yourname.com",
+    loginUrl: "https://login.xero.com/identity/user/login",
     loginText: "Client Login",
   },
 
