@@ -10,10 +10,10 @@ import siteData from "@/config/siteData";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FlexiPay Systems | Automated UK Payroll & Finance",
+  title: "Your Firm Name | Automated UK Payroll & Finance",
   description:
     "Advanced financial systems and automated payroll for UK founders and business owners.",
-  metadataBase: new URL("https://flexipaysystems.com"),
+  metadataBase: new URL("https://yourfirmname.com"),
 };
 
 export default function RootLayout({
