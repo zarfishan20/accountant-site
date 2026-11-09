@@ -1,94 +1,27 @@
-"use client";
-
 import { Mail, MapPin, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { SiteData } from "@/types/site";
 
-type Props = {
-  data: SiteData["footer"];
-};
+type Props = { data: SiteData["footer"] };
 
 export default function Footer({ data }: Props) {
   return (
-    <footer className="bg-brand-navy text-white pt-20 pb-8">
-
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-16 mb-16">
-
-        {/* Bio */}
-        <div>
-          <h3 className="text-brand-gold font-black text-xl mb-6 tracking-tighter">
-            {data.businessName}
-          </h3>
-          <p className="text-sm text-brand-light/50 leading-relaxed">
-            {data.description}
-          </p>
-        </div>
-
-        {/* Contact Info */}
-        <div className="space-y-4">
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold mb-6">
-            {data.contactTitle}
-          </h4>
-
-          <div className="flex items-start gap-3 text-sm text-brand-light/80">
-            <MapPin size={18} className="text-brand-gold shrink-0" />
-            <p>{data.address}</p>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm text-brand-light/80">
-            <Mail size={18} className="text-brand-gold" />
-            <a
-              href={`mailto:${data.email}`}
-              className="hover:text-brand-gold transition"
-            >
-              {data.email}
-            </a>
-          </div>
-        </div>
-
-        {/* Hours */}
-        <div>
-          <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-brand-gold mb-6">
-            {data.hoursTitle}
-          </h4>
-
-          <ul className="space-y-3 text-sm text-brand-light/80">
-            {data.hours.map((item, index) => (
-              <li
-                key={index}
-                className={`flex justify-between pb-2 ${
-                  item.closed ? "opacity-40" : "border-b border-white/5"
-                }`}
-              >
-                <span>{item.day}</span>
-                <span>{item.time}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+    <footer className="bg-brand-navy pb-8 pt-16 text-white">
+      <div className="mx-auto mb-14 grid max-w-7xl gap-12 px-6 md:grid-cols-3">
+        <div><h3 className="text-xl font-semibold tracking-tight text-white">{data.businessName}</h3><p className="mt-5 max-w-sm text-sm leading-7 text-white/55">{data.description}</p></div>
+        <div><h4 className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold">{data.contactTitle}</h4><div className="mt-6 space-y-4 text-sm text-white/70">
+          {data.address && <div className="flex items-start gap-3"><MapPin size={17} className="mt-0.5 shrink-0 text-brand-gold"/><p>{data.address}</p></div>}
+          {data.email && <div className="flex items-center gap-3"><Mail size={17} className="shrink-0 text-brand-gold"/><a href={`mailto:${data.email}`} className="transition hover:text-brand-gold">{data.email}</a></div>}
+          {!data.address && !data.email && <p>Contact details will appear here once configured.</p>}
+        </div></div>
+        <div><h4 className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold">{data.hoursTitle}</h4><ul className="mt-6 space-y-3 text-sm text-white/70">
+          {data.hours.map((item) => <li key={item.day} className="flex justify-between gap-4 border-b border-white/10 pb-3 last:border-0"><span>{item.day}</span><span>{item.time}</span></li>)}
+        </ul></div>
       </div>
-
-      {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-widest text-white/30">
-
-        <p>
-          © {data.year} {data.businessName} •{" "}
-          <Link href="/privacy" className="hover:text-white">
-            Privacy
-          </Link>
-        </p>
-
-        <a
-          href={data.creditLink}
-          target="_blank"
-          className="flex items-center gap-1 hover:text-brand-gold transition font-bold"
-        >
-          {data.creditText} <ExternalLink size={10} />
-        </a>
-
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 pt-7 text-[10px] uppercase tracking-[0.16em] text-white/40 md:flex-row">
+        <p>© {data.year} {data.businessName}. All rights reserved. · <Link href="/privacy" className="transition hover:text-white">Privacy</Link></p>
+        <a href={data.creditLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand-gold">{data.creditText}<ExternalLink size={11}/></a>
       </div>
-
     </footer>
   );
 }
