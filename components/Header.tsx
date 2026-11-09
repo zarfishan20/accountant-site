@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Calculator, ChevronDown, Lock, Menu, X } from "lucide-react";
+import { ArrowUpRight, Calculator, ChevronDown, Menu, X } from "lucide-react";
 import siteData from "@/config/siteData";
 
 export default function Header() {
@@ -29,7 +29,6 @@ export default function Header() {
             </div>}
           </div>
           <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-3 text-sm font-medium text-white transition hover:bg-brand-gold hover:text-brand-navy">Let’s talk <ArrowUpRight size={15} /></Link>
-          <a href={siteData.nav.loginUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-brand-slate transition hover:text-brand-gold"><Lock size={13} /> {siteData.nav.loginText}</a>
         </div>
         <button type="button" className="rounded-full p-2 text-brand-navy md:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)}>
           {isMobileMenuOpen ? <X size={23} /> : <Menu size={23} />}
@@ -42,7 +41,6 @@ export default function Header() {
           <p className="px-3 pb-1 pt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">Calculators</p>
           {siteData.nav.calculators.map((item) => <Link key={item.name} href={item.href} onClick={closeMenu} className="rounded-xl px-3 py-3 text-base text-brand-slate">{item.name}</Link>)}
           <Link href="/#contact" onClick={closeMenu} className="mt-4 rounded-full bg-brand-navy px-5 py-4 text-center text-sm font-semibold text-white">Let’s talk</Link>
-          <a href={siteData.nav.loginUrl} target="_blank" rel="noreferrer" className="py-4 text-center text-sm text-brand-slate"><Lock size={13} className="mr-2 inline" />{siteData.nav.loginText}</a>
         </div>
       </div>}
     </header>
