@@ -13,10 +13,11 @@ export default function ClosingCTA() {
       <motion.div initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="relative mx-auto max-w-3xl text-center">
         <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-brand-gold">{siteData.businessName}</p>
         <h2 className="text-4xl font-semibold leading-tight tracking-tight md:text-6xl">Let’s make the numbers work for your business.</h2>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/65">Tell us what support you need and take the next step towards clearer finances and more confident decisions.</p>
-        <p className="mt-10 text-xs text-white/50">Add your firm’s preferred email address or booking link in <code className="text-brand-gold">config/siteData.ts</code> to activate this contact section.</p>
-        <div className="mt-8 flex justify-center"><Link href={siteData.footer.email ? `mailto:${siteData.footer.email}` : "#contact-details"} className="inline-flex items-center gap-3 rounded-full bg-brand-gold px-7 py-4 text-sm font-semibold text-brand-navy transition hover:bg-white">Start a conversation <ArrowUpRight size={17}/></Link></div>
-        <span id="contact-details" className="sr-only">Contact details need to be configured before launch.</span>
+        <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/65">This sample layout shows how a clear, confident call to action can guide visitors towards the services that matter to them.</p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <Link href="/#services" className="inline-flex items-center gap-3 rounded-full bg-brand-gold px-7 py-4 text-sm font-semibold text-brand-navy transition hover:bg-white">Explore services <ArrowUpRight size={17}/></Link>
+          <Link href="/#calculators" className="inline-flex items-center gap-3 rounded-full border border-white/25 px-7 py-4 text-sm font-semibold text-white transition hover:border-brand-gold hover:text-brand-gold">Try the calculators</Link>
+        </div>
       </motion.div>
     </section>
   );
