@@ -1,135 +1,50 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, ChevronDown, Menu, X, Lock } from "lucide-react";
 import Link from "next/link";
+import { ArrowUpRight, Calculator, ChevronDown, Lock, Menu, X } from "lucide-react";
 import siteData from "@/config/siteData";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [calculatorsOpen, setCalculatorsOpen] = useState(false);
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
-    <nav className="bg-white border-b border-brand-navy/5 sticky top-0 z-50 font-sans">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-
-        {/* --- LOGO --- */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-black text-brand-navy tracking-tighter text-xl"
-        >
-          <Calculator className="text-brand-gold w-6 h-6" />
-          <span>{siteData.businessName}</span>
+    <header className="sticky top-0 z-50 border-b border-brand-navy/10 bg-brand-surface/95 backdrop-blur-xl">
+      <nav aria-label="Main navigation" className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-6">
+        <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-brand-light"><Calculator size={19} strokeWidth={1.7} /></span>
+          <span className="text-base font-semibold tracking-tight text-brand-navy md:text-lg">{siteData.businessName}</span>
         </Link>
-
-        {/* --- DESKTOP MENU --- */}
-        <div className="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-
-          {/* MAIN LINKS */}
-          {siteData.nav.links.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-brand-navy hover:text-brand-gold transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-
-          {/* CALCULATORS (Using CSS Group Hover to avoid hydration/state lag) */}
-          <div className="relative group py-4">
-            <button className="flex items-center gap-1 text-brand-navy group-hover:text-brand-gold transition-colors">
-              Calculators
-              <ChevronDown
-                size={12}
-                className="transition-transform duration-300 group-hover:rotate-180"
-              />
+        <div className="hidden items-center gap-8 md:flex">
+          <Link href="/" className="text-sm text-brand-slate transition hover:text-brand-gold">Home</Link>
+          <Link href="/#services" className="text-sm text-brand-slate transition hover:text-brand-gold">Services</Link>
+          <div className="relative">
+            <button type="button" aria-expanded={calculatorsOpen} onClick={() => setCalculatorsOpen((open) => !open)} className="flex items-center gap-1.5 text-sm text-brand-slate transition hover:text-brand-gold">
+              Calculators <ChevronDown size={15} className={calculatorsOpen ? "rotate-180 transition" : "transition"} />
             </button>
-
-            {/* Dropdown Menu */}
-            <div
-              className="absolute top-full -left-4 w-60 bg-white border border-brand-navy/5 shadow-2xl rounded-2xl py-3 
-                         opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 
-                         transition-all duration-300 z-50"
-            >
-              {siteData.nav.calculators.map((calc) => (
-                <Link
-                  key={calc.name}
-                  href={calc.href}
-                  className="block px-6 py-3 text-[10px] font-black text-brand-navy hover:bg-brand-light hover:text-brand-gold transition-colors uppercase tracking-widest"
-                >
-                  {calc.name}
-                </Link>
-              ))}
-            </div>
+            {calculatorsOpen && <div className="absolute left-0 top-full mt-4 w-56 rounded-2xl border border-brand-navy/10 bg-white p-2 shadow-xl">
+              {siteData.nav.calculators.map((item) => <Link key={item.name} href={item.href} onClick={() => setCalculatorsOpen(false)} className="block rounded-xl px-4 py-3 text-sm text-brand-slate transition hover:bg-brand-light hover:text-brand-navy">{item.name}</Link>)}
+            </div>}
           </div>
-
-          {/* LOGIN */}
-          <Link
-            href={siteData.nav.loginUrl}
-            target="_blank"
-            className="flex items-center gap-2 bg-brand-navy text-white px-6 py-3 rounded-full hover:bg-brand-gold hover:text-brand-navy transition-all"
-          >
-            <Lock size={12} />
-            <span className="mt-0.5">{siteData.nav.loginText}</span>
-          </Link>
+          <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-3 text-sm font-medium text-white transition hover:bg-brand-gold hover:text-brand-navy">Let’s talk <ArrowUpRight size={15} /></Link>
+          <a href={siteData.nav.loginUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-brand-slate transition hover:text-brand-gold"><Lock size={13} /> {siteData.nav.loginText}</a>
         </div>
-
-        {/* --- MOBILE BUTTON --- */}
-        <button
-          className="md:hidden text-brand-navy p-2 z-50"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        <button type="button" className="rounded-full p-2 text-brand-navy md:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)}>
+          {isMobileMenuOpen ? <X size={23} /> : <Menu size={23} />}
         </button>
-      </div>
-
-      {/* --- MOBILE MENU (Hydration-Safe Toggle) --- */}
-      <div 
-        className={`md:hidden bg-white border-t fixed inset-x-0 top-20 bottom-0 z-40 p-8 flex flex-col gap-8 overflow-y-auto transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen 
-            ? "opacity-100 translate-x-0 visible" 
-            : "opacity-0 translate-x-full invisible"
-        }`}
-      >
-        {siteData.nav.links.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className="text-3xl font-black text-brand-navy"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            {link.name}
-          </Link>
-        ))}
-
-        <div className="space-y-6 pt-4 border-t">
-          <p className="text-brand-gold font-black uppercase text-[10px]">
-            Calculators
-          </p>
-
-          <div className="grid gap-6 pl-4 border-l-2 border-brand-gold/20">
-            {siteData.nav.calculators.map((calc) => (
-              <Link
-                key={calc.name}
-                href={calc.href}
-                className="text-xl font-bold text-brand-slate"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {calc.name}
-              </Link>
-            ))}
-          </div>
+      </nav>
+      {isMobileMenuOpen && <div className="border-t border-brand-navy/10 bg-brand-surface px-6 pb-8 pt-5 md:hidden">
+        <div className="flex flex-col gap-1">
+          <Link href="/" onClick={closeMenu} className="rounded-xl px-3 py-3 text-lg text-brand-navy">Home</Link>
+          <Link href="/#services" onClick={closeMenu} className="rounded-xl px-3 py-3 text-lg text-brand-navy">Services</Link>
+          <p className="px-3 pb-1 pt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-brand-gold">Calculators</p>
+          {siteData.nav.calculators.map((item) => <Link key={item.name} href={item.href} onClick={closeMenu} className="rounded-xl px-3 py-3 text-base text-brand-slate">{item.name}</Link>)}
+          <Link href="/#contact" onClick={closeMenu} className="mt-4 rounded-full bg-brand-navy px-5 py-4 text-center text-sm font-semibold text-white">Let’s talk</Link>
+          <a href={siteData.nav.loginUrl} target="_blank" rel="noreferrer" className="py-4 text-center text-sm text-brand-slate"><Lock size={13} className="mr-2 inline" />{siteData.nav.loginText}</a>
         </div>
-
-        <Link
-          href={siteData.nav.loginUrl}
-          className="mt-auto bg-brand-navy text-white p-6 rounded-2xl text-center font-black flex justify-center items-center gap-3"
-        >
-          <Lock size={20} />
-          {siteData.nav.loginText}
-        </Link>
-      </div>
-    </nav>
+      </div>}
+    </header>
   );
 }
