@@ -12,7 +12,7 @@ export default function Footer({ data }: Props) {
         <div><h4 className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold">{data.contactTitle}</h4><div className="mt-6 space-y-4 text-sm text-white/70">
           {data.address && <div className="flex items-start gap-3"><MapPin size={17} className="mt-0.5 shrink-0 text-brand-gold"/><p>{data.address}</p></div>}
           {data.email && <div className="flex items-center gap-3"><Mail size={17} className="shrink-0 text-brand-gold"/><a href={`mailto:${data.email}`} className="transition hover:text-brand-gold">{data.email}</a></div>}
-          {!data.address && !data.email && <p>Contact details will appear here once configured.</p>}
+          {!data.address && !data.email && <p>Contact details are added when this concept is customised for a firm.</p>}
         </div></div>
         <div><h4 className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold">{data.hoursTitle}</h4><ul className="mt-6 space-y-3 text-sm text-white/70">
           {data.hours.map((item) => <li key={item.day} className="flex justify-between gap-4 border-b border-white/10 pb-3 last:border-0"><span>{item.day}</span><span>{item.time}</span></li>)}
@@ -20,7 +20,10 @@ export default function Footer({ data }: Props) {
       </div>
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 pt-7 text-[10px] uppercase tracking-[0.16em] text-white/40 md:flex-row">
         <p>© {data.year} {data.businessName}. All rights reserved. · <Link href="/privacy" className="transition hover:text-white">Privacy</Link></p>
-        <a href={data.creditLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand-gold">{data.creditText}<ExternalLink size={11}/></a>
+        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <span>Sample website concept · Illustrative content</span>
+          <a href={data.creditLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand-gold">{data.creditText}<ExternalLink size={11}/></a>
+        </div>
       </div>
     </footer>
   );
