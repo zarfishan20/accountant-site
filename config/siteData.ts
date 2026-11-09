@@ -1,8 +1,8 @@
 import { SiteData } from "@/types/site";
 
 const siteData: SiteData = {
-  businessName: "Your Accounting Firm",
-  logo: { icon: "Calculator", text: "Your Firm" },
+  businessName: "Northstar Accountancy",
+  logo: { icon: "Calculator", text: "Northstar" },
   nav: {
     links: [
       { name: "Home", href: "/" },
@@ -13,17 +13,17 @@ const siteData: SiteData = {
       { name: "Salary Estimator", href: "/#salary-calc" },
       { name: "Business ROI Estimator", href: "/#roi-calc" },
     ],
-    loginUrl: "https://login.xero.com/identity/user/login",
-    loginText: "Client Login",
+    loginUrl: "",
+    loginText: "",
   },
   hero: {
-    badge: "Accounting support for UK businesses",
+    badge: "A sample website concept for UK accountancy firms",
     titleTop: "Clarity for your",
     titleHighlight: "next chapter.",
     subtitle: "Straightforward bookkeeping, tax planning and financial insight to help you stay in control and move your business forward.",
-    cta: "Talk to our team",
+    cta: "Explore our services",
     image: "",
-    imagePlaceholder: "Your firm image",
+    imagePlaceholder: "Illustrative accountancy dashboard",
   },
   roiCalculator: {
     title: "Business Growth ROI",
@@ -31,7 +31,7 @@ const siteData: SiteData = {
     assumptions: { taxSavingRate: 0.05, hoursSaved: 120, hourlyRate: 50 },
     benefits: ["Illustrative tax-planning scenario", "Potential time saved", "A starting point for a conversation"],
     resultLabel: "Illustrative annual value",
-    resultSubtext: "Based on the assumptions shown in this estimator",
+    resultSubtext: "A demonstration based on editable assumptions, not a guaranteed saving",
   },
   salaryCalculator: {
     title: "UK Salary & Tax Estimator",
@@ -51,7 +51,7 @@ const siteData: SiteData = {
     ],
   },
   trustBar: {
-    badge: "Tools that help businesses stay organised",
+    badge: "Example software ecosystem",
     items: [
       { name: "QuickBooks", style: "bold" },
       { name: "Xero", style: "normal" },
@@ -62,8 +62,8 @@ const siteData: SiteData = {
   google: { placeId: "", useLiveReviews: false },
   reviewsSection: { title: "", subtitle: "", ratingText: "", staticReviews: [] },
   footer: {
-    businessName: "Your Accounting Firm",
-    description: "Practical accounting and financial support for UK businesses. Update this description to reflect your firm's services and specialisms.",
+    businessName: "Northstar Accountancy",
+    description: "A fictional accountancy brand used to demonstrate a polished website concept for prospective clients.",
     contactTitle: "Get in touch",
     address: "",
     email: "",
@@ -74,7 +74,7 @@ const siteData: SiteData = {
       { day: "Sunday", time: "Closed", closed: true },
     ],
     year: "2026",
-    creditText: "Designed by Caramel Web Studios",
+    creditText: "Website concept by Caramel Web Studios",
     creditLink: "https://caramelwebstudios.com",
   },
 };
