@@ -8,7 +8,10 @@ import siteData from "@/config/siteData";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [calculatorsOpen, setCalculatorsOpen] = useState(false);
-  const closeMenu = () => setIsMobileMenuOpen(false);
+  const closeMenu = () => {
+    setIsMobileMenuOpen(false);
+    setCalculatorsOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-brand-navy/10 bg-brand-surface/95 backdrop-blur-xl">
@@ -21,20 +24,20 @@ export default function Header() {
           <Link href="/" className="text-sm text-brand-slate transition hover:text-brand-gold">Home</Link>
           <Link href="/#services" className="text-sm text-brand-slate transition hover:text-brand-gold">Services</Link>
           <div className="relative">
-            <button type="button" aria-expanded={calculatorsOpen} onClick={() => setCalculatorsOpen((open) => !open)} className="flex items-center gap-1.5 text-sm text-brand-slate transition hover:text-brand-gold">
+            <button type="button" aria-expanded={calculatorsOpen} aria-controls="calculator-menu" onClick={() => setCalculatorsOpen((open) => !open)} className="flex items-center gap-1.5 text-sm text-brand-slate transition hover:text-brand-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-gold">
               Calculators <ChevronDown size={15} className={calculatorsOpen ? "rotate-180 transition" : "transition"} />
             </button>
-            {calculatorsOpen && <div className="absolute left-0 top-full mt-4 w-56 rounded-2xl border border-brand-navy/10 bg-white p-2 shadow-xl">
-              {siteData.nav.calculators.map((item) => <Link key={item.name} href={item.href} onClick={() => setCalculatorsOpen(false)} className="block rounded-xl px-4 py-3 text-sm text-brand-slate transition hover:bg-brand-light hover:text-brand-navy">{item.name}</Link>)}
+            {calculatorsOpen && <div id="calculator-menu" className="absolute left-0 top-full mt-4 w-56 rounded-2xl border border-brand-navy/10 bg-white p-2 shadow-xl">
+              {siteData.nav.calculators.map((item) => <Link key={item.name} href={item.href} onClick={() => setCalculatorsOpen(false)} className="block rounded-xl px-4 py-3 text-sm text-brand-slate transition hover:bg-brand-light hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-brand-gold">{item.name}</Link>)}
             </div>}
           </div>
-          <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-3 text-sm font-medium text-white transition hover:bg-brand-gold hover:text-brand-navy">Let’s talk <ArrowUpRight size={15} /></Link>
+          <Link href="/#contact" className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-3 text-sm font-medium text-white transition hover:bg-brand-gold hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-gold">Let’s talk <ArrowUpRight size={15} /></Link>
         </div>
-        <button type="button" className="rounded-full p-2 text-brand-navy md:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen((open) => !open)}>
+        <button type="button" className="rounded-full p-2 text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold md:hidden" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation" onClick={() => setIsMobileMenuOpen((open) => !open)}>
           {isMobileMenuOpen ? <X size={23} /> : <Menu size={23} />}
         </button>
       </nav>
-      {isMobileMenuOpen && <div className="border-t border-brand-navy/10 bg-brand-surface px-6 pb-8 pt-5 md:hidden">
+      {isMobileMenuOpen && <div id="mobile-navigation" className="border-t border-brand-navy/10 bg-brand-surface px-6 pb-8 pt-5 md:hidden">
         <div className="flex flex-col gap-1">
           <Link href="/" onClick={closeMenu} className="rounded-xl px-3 py-3 text-lg text-brand-navy">Home</Link>
           <Link href="/#services" onClick={closeMenu} className="rounded-xl px-3 py-3 text-lg text-brand-navy">Services</Link>
