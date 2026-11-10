@@ -1,5 +1,4 @@
 import { Mail, MapPin, ExternalLink } from "lucide-react";
-import Link from "next/link";
 import { SiteData } from "@/types/site";
 
 type Props = { data: SiteData["footer"] };
@@ -18,11 +17,11 @@ export default function Footer({ data }: Props) {
           {data.hours.map((item) => <li key={item.day} className="flex justify-between gap-4 border-b border-white/10 pb-3 last:border-0"><span>{item.day}</span><span>{item.time}</span></li>)}
         </ul></div>
       </div>
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 pt-7 text-[10px] uppercase tracking-[0.16em] text-white/40 md:flex-row">
-        <p>© {data.year} {data.businessName}. All rights reserved. · <Link href="/privacy" className="transition hover:text-white">Privacy</Link></p>
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-white/10 px-6 pt-7 text-center text-[10px] uppercase tracking-[0.16em] text-white/40 md:flex-row md:text-left">
+        <p>© {data.year} {data.businessName}. All rights reserved.</p>
         <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <span>Sample website concept · Illustrative content</span>
-          <a href={data.creditLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand-gold">{data.creditText}<ExternalLink size={11}/></a>
+          <a href={data.creditLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 transition hover:text-brand-gold focus-visible:outline-2 focus-visible:outline-brand-gold">{data.creditText}<ExternalLink size={11}/></a>
         </div>
       </div>
     </footer>
