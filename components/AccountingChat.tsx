@@ -20,7 +20,7 @@ const demoAnswers: { keywords: string[]; answer: string }[] = [
     answer: "PAYE is the system employers use to report pay and deductions to HMRC. A payroll service can help with payslips, tax and National Insurance deductions, reporting deadlines and workplace pension processes.",
   },
   {
-    keywords: ["self assessment", "self-assessment", "tax return", "tax return"],
+    keywords: ["self assessment", "self-assessment", "tax return"],
     answer: "Self Assessment is used to report income and gains that are not fully dealt with through PAYE. The records and deadlines you need depend on your circumstances, so it is worth checking the latest HMRC guidance before filing.",
   },
   {
@@ -51,21 +51,29 @@ export default function AccountingChat() {
     { role: "assistant", content: `Hello! I’m the ${siteData.businessName} demo assistant. Ask me a general question about bookkeeping, VAT, payroll or Self Assessment.` },
   ]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setIsMounted(true), []);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-  }, [messages, isLoading]);
+  }, [messages]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   if (!isMounted) return null;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const question = input.trim();
-    if (!question || isLoading) return;
+    if (!question) return;
 
     setMessages((previous) => [
       ...previous,
@@ -85,20 +93,26 @@ export default function AccountingChat() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-100 flex flex-col items-end gap-4 font-sans">
+    <div className="fixed bottom-4 right-4 z-100 flex flex-col items-end gap-3 font-sans sm:bottom-6 sm:right-6 sm:gap-4">
       {isOpen && (
-        <div className="flex h-[500px] w-[320px] flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-2xl sm:w-[380px]">
+        <div
+          role="dialog"
+          aria-label={`${siteData.businessName} demo assistant`}
+          aria-modal="false"
+          className="flex flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-2xl"
+          style={{ width: "min(380px, calc(100vw - 2rem))", height: "min(500px, calc(100dvh - 6rem))" }}
+        >
           <div className="flex items-center justify-between bg-brand-navy p-4 text-white">
             <div>
               <p className="text-sm font-bold tracking-tight">{siteData.businessName} Assistant</p>
               <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">Interactive demo</p>
             </div>
-            <button type="button" aria-label="Close assistant" onClick={() => setIsOpen(false)} className="rounded-lg p-1 transition-colors hover:bg-white/20">
+            <button type="button" aria-label="Close assistant" onClick={() => setIsOpen(false)} className="rounded-lg p-1 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
               <X size={20} />
             </button>
           </div>
 
-          <div ref={scrollRef} aria-live="polite" className="flex-1 space-y-4 overflow-y-auto bg-slate-50 p-4">
+          <div ref={scrollRef} role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions" className="flex-1 space-y-4 overflow-y-auto bg-slate-50 p-4">
             {messages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[88%] whitespace-pre-wrap rounded-2xl p-3 text-[13px] leading-relaxed shadow-sm ${message.role === "user" ? "rounded-tr-none bg-brand-navy text-white" : "rounded-tl-none border border-brand-navy/5 bg-white text-brand-navy"}`}>
@@ -112,7 +126,7 @@ export default function AccountingChat() {
           </div>
 
           <div className="border-t bg-white p-3">
-            <button type="button" onClick={handleBookingRedirect} className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-gold px-3 py-2.5 text-xs font-bold text-brand-navy transition hover:brightness-95">
+            <button type="button" onClick={handleBookingRedirect} className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-brand-gold px-3 py-2.5 text-xs font-bold text-brand-navy transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-navy">
               <Calendar size={14} /> Explore the contact section
             </button>
             <form onSubmit={handleSubmit} className="flex gap-2">
@@ -121,16 +135,16 @@ export default function AccountingChat() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="Ask about VAT, payroll..."
-                className="min-w-0 flex-1 rounded-xl bg-slate-100 p-2.5 text-sm text-brand-navy outline-none focus:ring-1 focus:ring-brand-gold"
+                className="min-w-0 flex-1 rounded-xl bg-slate-100 p-2.5 text-sm text-brand-navy outline-none focus-visible:ring-2 focus-visible:ring-brand-gold"
               />
-              <button type="submit" aria-label="Send message" disabled={!input.trim()} className="rounded-xl bg-brand-navy p-2.5 text-white transition-colors hover:bg-brand-gold hover:text-brand-navy disabled:opacity-40">
+              <button type="submit" aria-label="Send message" disabled={!input.trim()} className="rounded-xl bg-brand-navy p-2.5 text-white transition-colors hover:bg-brand-gold hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold disabled:opacity-40">
                 <Send size={18} />
               </button>
             </form>
           </div>
         </div>
       )}
-      <button type="button" aria-label={isOpen ? "Close demo assistant" : "Open demo assistant"} aria-expanded={isOpen} onClick={() => setIsOpen((open) => !open)} className="rounded-full border-2 border-brand-gold/20 bg-brand-navy p-4 text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-brand-gold hover:text-brand-navy">
+      <button type="button" aria-label={isOpen ? "Close demo assistant" : "Open demo assistant"} aria-expanded={isOpen} onClick={() => setIsOpen((open) => !open)} className="rounded-full border-2 border-brand-gold/20 bg-brand-navy p-4 text-white shadow-2xl transition-all duration-300 hover:scale-105 hover:bg-brand-gold hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-gold">
         {isOpen ? <X size={26} /> : <MessageCircle size={26} />}
       </button>
     </div>
