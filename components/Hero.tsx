@@ -18,7 +18,7 @@ export default function Hero({ data }: Props) {
           <h1 className="mt-8 max-w-3xl text-[clamp(3.25rem,7vw,6.5rem)] font-semibold leading-[0.98] tracking-[-0.065em] text-brand-navy">{data.titleTop}<span className="mt-1 block font-serif font-normal italic text-brand-gold">{data.titleHighlight}</span></h1>
           <p className="mt-8 max-w-xl text-base leading-8 text-brand-slate md:text-lg">{data.subtitle}</p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link href="/#contact" className="group inline-flex items-center gap-3 rounded-full bg-brand-navy px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-brand-navy/10 transition hover:-translate-y-0.5 hover:bg-brand-gold hover:text-brand-navy">{data.cta}<ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></Link>
+            <Link href="/#services" className="group inline-flex items-center gap-3 rounded-full bg-brand-navy px-7 py-4 text-sm font-semibold text-white shadow-lg shadow-brand-navy/10 transition hover:-translate-y-0.5 hover:bg-brand-gold hover:text-brand-navy">{data.cta}<ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></Link>
             <Link href="/#services" className="inline-flex items-center gap-2 px-3 py-3 text-sm font-semibold text-brand-navy transition hover:text-brand-gold">Explore services <ArrowDown size={15} /></Link>
           </div>
           <div className="mt-12 flex flex-wrap gap-x-7 gap-y-3 border-t border-brand-navy/10 pt-6 text-xs text-brand-slate">
