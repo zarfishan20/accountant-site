@@ -1,161 +1,81 @@
 import { SiteData } from "@/types/site";
 
 const siteData: SiteData = {
-  businessName: "Your Accounting Firm",
-
-  logo: {
-    icon: "Calculator",
-    text: "CPA",
-  },
-
+  businessName: "Northstar Accountancy",
+  logo: { icon: "Calculator", text: "Northstar" },
   nav: {
     links: [
       { name: "Home", href: "/" },
-      { name: "News", href: "/news" },
-      { name: "Contact Us", href: "/#contact" },
+      { name: "Services", href: "/#services" },
+      { name: "Contact", href: "/#contact" },
     ],
     calculators: [
       { name: "Salary Estimator", href: "/#salary-calc" },
-      { name: "ROI Tracker", href: "/#roi-calc" },
-      { name: "Tax Optimizer", href: "/#salary-calc" },
+      { name: "Business ROI Estimator", href: "/#roi-calc" },
     ],
-    loginUrl: "https://login.xero.com/identity/user/login",
-    loginText: "Client Login",
+    loginUrl: "",
+    loginText: "",
   },
-
   hero: {
-    badge: "UK Tax Strategy 2026",
-    titleTop: "Tax stress",
-    titleHighlight: "simplified.",
-    subtitle:
-      "Automating books and optimizing UK tax strategy for modern service-based business owners.",
-    cta: "Book a Free Consultation",
+    badge: "A sample website concept for UK accountancy firms",
+    titleTop: "Clarity for your",
+    titleHighlight: "next chapter.",
+    subtitle: "Straightforward bookkeeping, tax planning and financial insight to help you stay in control and move your business forward.",
+    cta: "Explore our services",
     image: "",
-    imagePlaceholder: "Professional Accounting Image",
+    imagePlaceholder: "Illustrative accountancy dashboard",
   },
-
   roiCalculator: {
     title: "Business Growth ROI",
-    inputs: {
-      label: "Annual Business Turnover (£)",
-      defaultValue: 100000,
-    },
-    assumptions: {
-      taxSavingRate: 0.05,
-      hoursSaved: 120,
-      hourlyRate: 50,
-    },
-    benefits: [
-      "HMRC Tax Optimization",
-      "120+ Hours Saved Yearly",
-      "Penalty Prevention",
-    ],
-    resultLabel: "Value of Expert Support",
-    resultSubtext: "Estimated annual recovery",
+    inputs: { label: "Annual Business Turnover (£)", defaultValue: 100000 },
+    assumptions: { taxSavingRate: 0.05, hoursSaved: 120, hourlyRate: 50 },
+    benefits: ["Illustrative tax-planning scenario", "Potential time saved", "A starting point for a conversation"],
+    resultLabel: "Illustrative annual value",
+    resultSubtext: "A demonstration based on editable assumptions, not a guaranteed saving",
   },
-
   salaryCalculator: {
     title: "UK Salary & Tax Estimator",
-    inputs: {
-      min: 15000,
-      max: 150000,
-      step: 1000,
-      defaultGross: 50000,
-    },
-    ukTax: {
-      personalAllowance: 12570,
-      basicRateLimit: 37700,
-      basicRate: 0.2,
-      higherRate: 0.4,
-      niThreshold: 12570,
-      niRate: 0.08,
-    },
+    inputs: { min: 15000, max: 150000, step: 1000, defaultGross: 50000 },
+    ukTax: { personalAllowance: 12570, basicRateLimit: 37700, basicRate: 0.2, higherRate: 0.4, niThreshold: 12570, niRate: 0.08 },
     tip: {
-      title: "Tax Efficiency Tip",
-      text:
-        "Personal Allowance covers your first £12,570. Salary/dividend split reduces NI.",
+      title: "Illustrative estimate",
+      text: "This simplified estimate excludes factors such as Scottish income tax, pension contributions, student loans and other individual circumstances. Check current HMRC guidance before making decisions.",
     },
   },
-
   services: {
-    title: "Scale with confidence",
+    title: "The right support, at every stage.",
     items: [
-      {
-        icon: "PieChart",
-        title: "Monthly Books",
-        desc: "HMRC-compliant records delivered monthly.",
-      },
-      {
-        icon: "ShieldCheck",
-        title: "Tax Strategy",
-        desc: "Keep more of your revenue legally.",
-      },
-      {
-        icon: "BarChart3",
-        title: "CFO Insights",
-        desc: "Cash flow and scaling advice.",
-      },
+      { icon: "PieChart", title: "Monthly Books", desc: "Keep your records organised with regular bookkeeping and a clearer view of your business finances." },
+      { icon: "ShieldCheck", title: "Tax Strategy", desc: "Understand your obligations, plan ahead and make informed decisions with practical tax support." },
+      { icon: "BarChart3", title: "CFO Insights", desc: "Turn financial information into useful insight for cash flow, planning and sustainable growth." },
     ],
   },
-
   trustBar: {
-    badge: "Certified Expert in Modern Financial Tools",
+    badge: "Example software ecosystem",
     items: [
-      { name: "QuickBooks", style: "bold underline" },
-      { name: "Xero", style: "normal uppercase" },
-      { name: "FreshBooks", style: "accent split" },
-      { name: "Gusto", style: "medium" },
+      { name: "QuickBooks", style: "bold" },
+      { name: "Xero", style: "normal" },
+      { name: "FreshBooks", style: "normal" },
+      { name: "Gusto", style: "normal" },
     ],
   },
-
-  google: {
-    placeId: "PLACE_ID_HERE",
-    useLiveReviews: false,
-  },
-
-  reviewsSection: {
-    title: "Trusted by UK",
-    subtitle: "Founders",
-    ratingText: "5.0 Google Rating",
-    staticReviews: [
-      {
-        id: 1,
-        author: "James W.",
-        text: "Best accounting firm in London.",
-        rating: 5,
-      },
-      {
-        id: 2,
-        author: "Sarah L.",
-        text: "ROI calculator is amazing.",
-        rating: 5,
-      },
-      {
-        id: 3,
-        author: "TechFlow Ltd",
-        text: "Smooth transition to MTD.",
-        rating: 5,
-      },
-    ],
-  },
-
+  google: { placeId: "", useLiveReviews: false },
+  reviewsSection: { title: "", subtitle: "", ratingText: "", staticReviews: [] },
   footer: {
-    businessName: "Your Accounting Firm",
-    description:
-      "Specialized accounting for modern businesses and freelancers.",
-    contactTitle: "Get in Touch",
-    address: "123 Wall Street, London",
-    email: "hello@yourfirm.com",
-    hoursTitle: "Business Hours",
+    businessName: "Northstar Accountancy",
+    description: "A fictional accountancy brand used to demonstrate a polished website concept for prospective clients.",
+    contactTitle: "Get in touch",
+    address: "",
+    email: "",
+    hoursTitle: "Business hours",
     hours: [
-      { day: "Mon — Fri", time: "9:00 AM - 6:00 PM" },
-      { day: "Sat", time: "By Appointment" },
-      { day: "Sun", time: "Closed", closed: true },
+      { day: "Monday — Friday", time: "9:00am — 5:30pm" },
+      { day: "Saturday", time: "By appointment" },
+      { day: "Sunday", time: "Closed", closed: true },
     ],
     year: "2026",
-    creditText: "Designed by Caramel Web Studios",
+    creditText: "Website concept by Caramel Web Studios",
     creditLink: "https://caramelwebstudios.com",
   },
 };
-
 export default siteData;

@@ -1,45 +1,13 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { SiteData } from "@/types/site";
+type Props = { data: SiteData["trustBar"] };
 
-type Props = {
-  data: SiteData["trustBar"];
-};
-
-export default function TrustBar({ data }: Props){
-
-
+export default function TrustBar({ data }: Props) {
   return (
-    <section className="border-y border-brand-navy/5 bg-white py-12 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-
-        <p className="text-center text-xs font-bold text-brand-slate uppercase tracking-[0.2em] mb-10">
-          {data.badge}
-        </p>
-
-        {/* CAROUSEL WRAPPER */}
-        <div className="relative overflow-hidden">
-
-          <motion.div
-            className="flex gap-16 whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              repeat: Infinity,
-              duration: 20,
-              ease: "linear",
-            }}
-          >
-            {[...data.items, ...data.items].map((item, i) => (
-              <span
-                key={i}
-                className="text-2xl font-bold text-brand-navy opacity-50 hover:opacity-100 transition"
-              >
-                {item.name}
-              </span>
-            ))}
-          </motion.div>
-
+    <section className="border-y border-brand-navy/10 bg-brand-light py-8">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 px-6 md:flex-row md:justify-between">
+        <p className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-brand-slate md:text-left">{data.badge}</p>
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          {data.items.map((item) => <span key={item.name} className="text-sm font-semibold tracking-tight text-brand-navy/65">{item.name}</span>)}
         </div>
       </div>
     </section>

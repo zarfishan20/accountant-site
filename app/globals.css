@@ -1,24 +1,51 @@
 @import "tailwindcss";
+
 @theme {
-  /* Define your "Accounting" Brand Colors */
-  --color-brand-navy: #0f172a;
-  --color-brand-gold: #c5a47e;
-  --color-brand-slate: #1e293b;
-  --color-brand-light: #f8fafc;
-  
-  /* You can also define custom spacing or fonts here */
+  --color-brand-navy: #173b32;
+  --color-brand-gold: #b68b5c;
+  --color-brand-slate: #46544d;
+  --color-brand-light: #f2f0e9;
+  --color-brand-surface: #f8f7f2;
+  --color-brand-text: #173b32;
+  --color-brand-primary: #173b32;
+  --color-brand-accent: #b68b5c;
+  --color-brand-muted: #778078;
   --font-sans: "Inter", ui-sans-serif, system-ui;
 }
 
-/* Base styles for the whole site */
 :root {
-  background-color: var(--color-brand-light);
-  color: var(--color-brand-navy);
+  color-scheme: light;
+  background: var(--color-brand-surface);
+  color: var(--color-brand-text);
+  scroll-behavior: smooth;
 }
 
+* { box-sizing: border-box; }
+
 body {
+  margin: 0;
+  background: var(--color-brand-surface);
+  color: var(--color-brand-text);
   @apply antialiased;
 }
-button {
-  @apply bg-brand-navy text-white px-4 py-2 rounded-md hover:opacity-90 transition;
+
+::selection { background: #d9c4a8; color: #173b32; }
+a { text-underline-offset: 4px; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+section[id] { scroll-margin-top: 6rem; }
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
